@@ -1,0 +1,30 @@
+{
+  "replacements": {
+    "android.hardware.biometrics.face@1.0-service.google": "FloralFaceIDHal",
+    "android.hardware.keymaster@4.1-service.citadel": "FloralFaceIDCitadelKeymaster",
+    "android.hardware.keymaster@4.1-impl.nos": "FloralFaceIDCitadelImpl",
+    "libface-calibration-proto": "FloralFaceIDCalibrationProto",
+    "libface-enroll-proto": "FloralFaceIDEnrollmentProto",
+    "libfaceauth-util": "FloralFaceIDAuthUtil",
+    "libairbrush-pixel": "FloralFaceIDAirbrushClient",
+    "vendor.google.airbrush@1.0-service": "FloralFaceIDAirbrushService",
+    "android.hardware.neuralnetworks@1.2-service-noronha": "FloralFaceIDNeuralNetworks",
+    "libautocalsolvers": "FloralFaceIDAutocalSolvers"
+  },
+  "aliases": {
+    "android.hardware.biometrics.face@1.0-service.google": "FloralFaceIDHal",
+    "android.hardware.keymaster@4.1-service.citadel": "FloralFaceIDCitadelKeymaster",
+    "android.hardware.keymaster@4.1-impl.nos": "FloralFaceIDCitadelImpl",
+    "libface-calibration-proto": "FloralFaceIDCalibrationProto",
+    "libface-enroll-proto": "FloralFaceIDEnrollmentProto",
+    "libfaceauth-util": "FloralFaceIDAuthUtil",
+    "libairbrush-pixel": "FloralFaceIDAirbrushClient",
+    "vendor.google.airbrush@1.0-service": "FloralFaceIDAirbrushService",
+    "android.hardware.neuralnetworks@1.2-service-noronha": "FloralFaceIDNeuralNetworks",
+    "libautocalsolvers": "FloralFaceIDAutocalSolvers",
+    "libbase-v33": "FloralFaceIDV33Base",
+    "libcrypto-v33": "FloralFaceIDV33Crypto",
+    "libstagefright_foundation-v33": "FloralFaceIDV33Foundation",
+    "libcamera2ndk_v33_face": "FloralFaceIDCameraNDK"
+  }
+}

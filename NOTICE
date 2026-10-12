@@ -1,0 +1,8 @@
+Floral 3D Face ID build plugin
+
+Integration and port changes: Copyright 2026 Hecker.
+AOSP and LineageOS source files retain their original copyright notices and Apache-2.0 license.
+The repository LICENSE covers source/build code; imported Google APKs/native binaries and upstream compatibility libraries retain their upstream terms.
+Immutable source URLs and SHA-256 fingerprints are listed in prebuilts.lock.json.
+Camera NDK compatibility source: Android Open Source Project, adapted by Hecker for the Pixel 4 Face HAL.
+Native ABI libraries: LineageOS/android_hardware_lineage_compat, pinned in prebuilts.lock.json.

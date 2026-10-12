@@ -1,0 +1,37 @@
+name: Check Floral 3D Face ID plugin
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Fetch and validate immutable native inputs
+        run: |
+          python3 tools/fetch_prebuilts.py
+          python3 tools/check_port.py
+      - name: Check sensor preservation and conflicting configurations
+        run: python3 -m unittest discover -s tests -p test_setup.py -v
+      - name: Fetch pinned Android 17 framework references
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/face-reference"
+          FLORAL_REF='https://raw.githubusercontent.com/LineageOS/android_frameworks_base/6cdc375a23b72398dbe0358832c9305d31b802aa/services/core/java/com/android/server/biometrics/sensors/face'
+          curl -fL --retry 3 "$FLORAL_REF/hidl/HidlToAidlSessionAdapter.java" -o "$RUNNER_TEMP/face-reference/HidlToAidlSessionAdapter.java"
+          curl -fL --retry 3 "$FLORAL_REF/aidl/FaceRevokeChallengeClient.java" -o "$RUNNER_TEMP/face-reference/FaceRevokeChallengeClient.java"
+          curl -fL --retry 3 "$FLORAL_REF/aidl/FaceEnrollClient.java" -o "$RUNNER_TEMP/face-reference/FaceEnrollClient.java"
+          curl -fL --retry 3 "$FLORAL_REF/aidl/AidlConversionUtils.java" -o "$RUNNER_TEMP/face-reference/AidlConversionUtils.java"
+      - name: Execute guarded source and Java challenge/pose regressions
+        run: python3 tests/check_framework_fixes.py --reference-dir "$RUNNER_TEMP/face-reference"

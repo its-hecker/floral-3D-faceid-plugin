@@ -1,0 +1,122 @@
+{
+  "schema": 1,
+  "artifacts": [
+    {
+      "repository": "its-hecker/infinity_cnb_proprietary_vendor_google_coral",
+      "revision": "211e454a5809b98fb85e883ace545fbdb9ba939d",
+      "path": "proprietary/vendor/bin/hw/android.hardware.biometrics.face@1.0-service.google",
+      "destination": "proprietary/vendor/bin/hw/android.hardware.biometrics.face@1.0-service.google",
+      "sha256": "56502b0369ea3ad5f8010690c291651ad6d312514b0af2ec4793a7e6d0c22482",
+      "size": 778330,
+      "git_blob": "ba59e077eb80c099c8c0fb1cef94a2904240d446"
+    },
+    {
+      "repository": "its-hecker/infinity_cnb_proprietary_vendor_google_coral",
+      "revision": "211e454a5809b98fb85e883ace545fbdb9ba939d",
+      "path": "proprietary/vendor/bin/hw/android.hardware.keymaster@4.1-service.citadel",
+      "destination": "proprietary/vendor/bin/hw/android.hardware.keymaster@4.1-service.citadel",
+      "sha256": "586e01fcc6af409d0aafe1fe130ee5f67468b27fc11206de4364f117d4887214",
+      "size": 68649,
+      "git_blob": "6d6202c64dc2a675300fb2859e2b1fca290bf5ab"
+    },
+    {
+      "repository": "its-hecker/infinity_cnb_proprietary_vendor_google_coral",
+      "revision": "211e454a5809b98fb85e883ace545fbdb9ba939d",
+      "path": "proprietary/vendor/lib64/android.hardware.keymaster@4.1-impl.nos.so",
+      "destination": "proprietary/vendor/lib64/android.hardware.keymaster@4.1-impl.nos.so",
+      "sha256": "eec5e6a6e33ed9e0eb3d83c1b2dfd444ac1f9a73e965ae72dfe4ae93b2720fb3",
+      "size": 287721,
+      "git_blob": "769a5086779c94fb3cf428cb9f17ddb9ab70197c"
+    },
+    {
+      "repository": "its-hecker/infinity_cnb_proprietary_vendor_google_coral",
+      "revision": "211e454a5809b98fb85e883ace545fbdb9ba939d",
+      "path": "proprietary/vendor/lib64/libface-calibration-proto.so",
+      "destination": "proprietary/vendor/lib64/libface-calibration-proto.so",
+      "sha256": "4823086bcacfbad0693cc2dc0b072e75c0aa647410b9998a792d37108d4c180c",
+      "size": 140624,
+      "git_blob": "0c979101780e17763014ab1ac6564b7a00b93822"
+    },
+    {
+      "repository": "its-hecker/infinity_cnb_proprietary_vendor_google_coral",
+      "revision": "211e454a5809b98fb85e883ace545fbdb9ba939d",
+      "path": "proprietary/vendor/lib64/libface-enroll-proto.so",
+      "destination": "proprietary/vendor/lib64/libface-enroll-proto.so",
+      "sha256": "bd2729fcf10f650241599bd491e2e8810b6b059cdb12e8d4c9720753972929cf",
+      "size": 50480,
+      "git_blob": "cd4a02730df9506272ca757ed78c3b84aabd32bf"
+    },
+    {
+      "repository": "its-hecker/infinity_cnb_proprietary_vendor_google_coral",
+      "revision": "211e454a5809b98fb85e883ace545fbdb9ba939d",
+      "path": "proprietary/vendor/lib64/libfaceauth-util.so",
+      "destination": "proprietary/vendor/lib64/libfaceauth-util.so",
+      "sha256": "782066211a7cbf7a5f4d79bdbd857270d926a3a782e2b579b40cbbf44bf780d1",
+      "size": 636472,
+      "git_blob": "23075597d7d9f334f9ba5510cde708af90b98af0"
+    },
+    {
+      "repository": "its-hecker/infinity_cnb_proprietary_vendor_google_coral",
+      "revision": "211e454a5809b98fb85e883ace545fbdb9ba939d",
+      "path": "proprietary/vendor/lib64/libairbrush-pixel.so",
+      "destination": "proprietary/vendor/lib64/libairbrush-pixel.so",
+      "sha256": "86fac0a8656f5b529c1f624ec440a269498978efe7b5b2b0b500ab525816b397",
+      "size": 50200,
+      "git_blob": "f4a006575054c5995e2092e61e7efd5fb7bac0a5"
+    },
+    {
+      "repository": "its-hecker/infinity_cnb_proprietary_vendor_google_coral",
+      "revision": "211e454a5809b98fb85e883ace545fbdb9ba939d",
+      "path": "proprietary/vendor/bin/hw/vendor.google.airbrush@1.0-service",
+      "destination": "proprietary/vendor/bin/hw/vendor.google.airbrush@1.0-service",
+      "sha256": "a22ea0f9eec9f455721f7704e076bac614f25a3eb9ffe841947a02afdc218433",
+      "size": 218321,
+      "git_blob": "3587d462d502e5033216891bfcc7540cdbf35d73"
+    },
+    {
+      "repository": "its-hecker/infinity_cnb_proprietary_vendor_google_coral",
+      "revision": "211e454a5809b98fb85e883ace545fbdb9ba939d",
+      "path": "proprietary/vendor/bin/hw/android.hardware.neuralnetworks@1.2-service-noronha",
+      "destination": "proprietary/vendor/bin/hw/android.hardware.neuralnetworks@1.2-service-noronha",
+      "sha256": "fb3e3ade92844d678f3c7c3a7899c11ebf02d10f8975a2a5d141d0488426edff",
+      "size": 2483785,
+      "git_blob": "dcf35869d675124341dd0d9e9677303a9a56ed8a"
+    },
+    {
+      "repository": "its-hecker/infinity_cnb_proprietary_vendor_google_coral",
+      "revision": "211e454a5809b98fb85e883ace545fbdb9ba939d",
+      "path": "proprietary/vendor/lib64/libautocalsolvers.so",
+      "destination": "proprietary/vendor/lib64/libautocalsolvers.so",
+      "sha256": "d7b090b95f01d707b1be17f3a0db070bf84d8f7598a814d0bb6e17a18372891a",
+      "size": 5622064,
+      "git_blob": "c2fdf209a1c63f7c8c69bbca85c0b0b7f2fd253c"
+    },
+    {
+      "repository": "LineageOS/android_hardware_lineage_compat",
+      "revision": "590c94850e079642136a4577305d02e4174caabc",
+      "path": "vndk/v33/arm64/libbase-v33.so",
+      "destination": "proprietary/compat/libbase-v33.so",
+      "sha256": "46fb531d357b31501f4629dd50f08bd1489c9eea6842723d07866d08be02b866",
+      "size": 275808,
+      "git_blob": "c67f8f858f420a1bdf5b54099d58e1cefdb4d56a"
+    },
+    {
+      "repository": "LineageOS/android_hardware_lineage_compat",
+      "revision": "590c94850e079642136a4577305d02e4174caabc",
+      "path": "vndk/v33/arm64/libcrypto-v33.so",
+      "destination": "proprietary/compat/libcrypto-v33.so",
+      "sha256": "1e61f1c75fdd40b3054eb18d45500eb204f46ec684598c97df659d06f9c0d4d6",
+      "size": 1317768,
+      "git_blob": "e99fe843b8f7b1aa3937d85b1bdb91cc84cae951"
+    },
+    {
+      "repository": "LineageOS/android_hardware_lineage_compat",
+      "revision": "590c94850e079642136a4577305d02e4174caabc",
+      "path": "vndk/v33/arm64/libstagefright_foundation-v33.so",
+      "destination": "proprietary/compat/libstagefright_foundation-v33.so",
+      "sha256": "04dca108a8481752f564b38f41702b70763c48520f39b7bb1ac766eca55ddbbe",
+      "size": 207488,
+      "git_blob": "f0f9d6b08807e295f5bae12f0f3b8dd489468946"
+    }
+  ]
+}

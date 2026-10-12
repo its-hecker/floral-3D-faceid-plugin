@@ -3,3 +3,6 @@ __pycache__/
 /proprietary/
 /generated/
 /out/
+/Android.bp
+/native/camera/Android.bp
+/overlay/res/
