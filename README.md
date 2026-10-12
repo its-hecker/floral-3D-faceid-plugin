@@ -1,7 +1,7 @@
 # Floral 3D Face ID plugin — Android 17
 
 Reusable **hardware 3D Face Unlock** integration for Pixel 4 (`flame`) and
-Pixel 4 XL (`coral`). The plugin packages Hecker's working Floral Face HAL
+Pixel 4 XL (`coral`). The plugin packages my working Floral Face HAL
 compatibility repair as product/board includes, isolated native modules,
 guarded framework patches and a generated biometric configuration.
 
