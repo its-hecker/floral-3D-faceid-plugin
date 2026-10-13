@@ -169,7 +169,7 @@ of this hardware compatibility package.
 
 ## Credits and sources
 
-Port, compatibility fixes and packaging: **Hecker**. Google supplies the native
+Port, compatibility fixes and packaging: **Hecker** (https://github.com/its-hecker). Google supplies the native
 Face/Citadel components; AOSP and LineageOS supply the camera/framework and ABI
 compatibility sources. Immutable binary provenance is in `prebuilts.lock.json`;
 source/license attribution is in `NOTICE` and the original file headers.
