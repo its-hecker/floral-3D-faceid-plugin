@@ -22,8 +22,8 @@ jobs:
         run: |
           python3 tools/fetch_prebuilts.py
           python3 tools/check_port.py
-      - name: Check sensor preservation and conflicting configurations
-        run: python3 -m unittest discover -s tests -p test_setup.py -v
+      - name: Check sensor preservation and product/bootstrap Make parsing
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
       - name: Fetch pinned Android 17 framework references
         run: |
           set -euo pipefail

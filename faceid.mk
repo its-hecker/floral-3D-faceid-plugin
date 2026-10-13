@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
-FLORAL_FACEID_PLUGIN_PATH := $(call my-dir)
+# Product bootstrap can run before Android defines the my-dir helper.
+FLORAL_FACEID_PLUGIN_PATH := $(patsubst %/,%,$(dir $(lastword $(MAKEFILE_LIST))))
 ifeq ($(wildcard $(FLORAL_FACEID_PLUGIN_PATH)/generated/profile.json),)
 $(error Fetch prebuilts, apply the guarded framework fixes and run $(FLORAL_FACEID_PLUGIN_PATH)/tools/prepare.py before building)
 endif
