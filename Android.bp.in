@@ -112,6 +112,7 @@ cc_prebuilt_binary {
 
 cc_prebuilt_library_shared {
     name: "FloralFaceIDCitadelImpl",
+    overrides: ["android.hardware.keymaster@4.1-impl.nos"],
     owner: "google",
     stem: "android.hardware.keymaster@4.1-impl.nos",
     strip: {
@@ -148,6 +149,7 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
     name: "FloralFaceIDCalibrationProto",
+    overrides: ["libface-calibration-proto"],
     owner: "google",
     stem: "libface-calibration-proto",
     strip: {
@@ -175,6 +177,7 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
     name: "FloralFaceIDEnrollmentProto",
+    overrides: ["libface-enroll-proto"],
     owner: "google",
     stem: "libface-enroll-proto",
     strip: {
@@ -202,6 +205,7 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
     name: "FloralFaceIDAuthUtil",
+    overrides: ["libfaceauth-util"],
     owner: "google",
     stem: "libfaceauth-util",
     strip: {
@@ -227,6 +231,7 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
     name: "FloralFaceIDAirbrushClient",
+    overrides: ["libairbrush-pixel"],
     owner: "google",
     stem: "libairbrush-pixel",
     strip: {
