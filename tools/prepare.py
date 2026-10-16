@@ -59,25 +59,33 @@ def namespace_imports(vendor, rom):
     return list(dict.fromkeys(imports))
 
 
-def foundation_module(rom, root):
+def compat_modules(rom, root):
     # Reuse Lineage's identical multilib provider instead of overriding its
     # whole module with our arm64-only fallback and dropping its arm variant.
-    module = "libstagefright_foundation-v33"
+    bindings = {"FloralFaceIDV33Base": "libbase-v33",
+                "FloralFaceIDV33Crypto": "libcrypto-v33",
+                "FloralFaceIDV33Foundation": "libstagefright_foundation-v33"}
     source = rom / "hardware/lineage/compat/Android.bp"
+    selected = {name: name for name in bindings}
     if not source.is_file():
-        return "FloralFaceIDV33Foundation", []
+        return selected, []
     text = source.read_text()
-    if not re.search(r'\bname:\s*"' + module + r'"', text):
-        return "FloralFaceIDV33Foundation", [source]
-    block = re.search(r'(?ms)^cc_prebuilt_library_shared\s*\{\s*name:\s*"' +
-                      module + r'",.*?^\}', text)
-    if (not block or 'vendor_available: true' not in block.group() or
-            '"vndk/v33/arm64/' + module + '.so"' not in block.group()):
-        raise ValueError("Review the existing v33 foundation provider before sharing it")
-    binary = source.parent / "vndk/v33/arm64" / (module + ".so")
-    if binary.read_bytes() != (root / "proprietary/compat" / (module + ".so")).read_bytes():
-        raise ValueError("Existing v33 foundation differs from the pinned Face ID ABI")
-    return module, [source, binary]
+    inputs = [source]
+    for alias, module in bindings.items():
+        if not re.search(r'\bname:\s*"' + module + r'"', text):
+            continue
+        block = re.search(r'(?ms)^cc_prebuilt_library_shared\s*\{\s*name:\s*"' +
+                          module + r'",.*?^\}', text)
+        if (not block or not any(flag in block.group() for flag in
+                                 ("vendor_available: true", "vendor: true")) or
+                '"vndk/v33/arm64/' + module + '.so"' not in block.group()):
+            raise ValueError("Review the existing v33 provider before sharing it: " + module)
+        binary = source.parent / "vndk/v33/arm64" / (module + ".so")
+        if binary.read_bytes() != (root / "proprietary/compat" / (module + ".so")).read_bytes():
+            raise ValueError("Existing v33 provider differs from the pinned Face ID ABI: " + module)
+        selected[alias] = module
+        inputs.append(binary)
+    return selected, inputs
 
 
 def prepare(rom, vendor, overlays, requested_id=None, skip_vintf=False, root=ROOT):
@@ -86,7 +94,7 @@ def prepare(rom, vendor, overlays, requested_id=None, skip_vintf=False, root=ROO
     if status == "patch available":
         raise ValueError("Apply tools/apply_framework_fixes.py --rom-root <ROM> --apply first")
     imports = namespace_imports(vendor, rom)
-    foundation, foundation_inputs = foundation_module(rom, root)
+    compat, compat_inputs = compat_modules(rom, root)
     sensors, face_id = sensor_config(overlays, requested_id)
     # This userspace port relies on the real Floral hardware/firmware base.
     for file in ["proprietary/vendor/firmware/faceauth_config.yaml",
@@ -97,16 +105,18 @@ def prepare(rom, vendor, overlays, requested_id=None, skip_vintf=False, root=ROO
         target = root / path
         text = target.with_suffix(".bp.in").read_text()
         text = text.replace("@NAMESPACE_IMPORTS@", json.dumps(imports))
-        if foundation != "FloralFaceIDV33Foundation":
-            text = re.sub(r'(?ms)^cc_prebuilt_library_shared\s*\{\s*name:\s*'
-                          r'"FloralFaceIDV33Foundation",.*?^\}\n?', '', text)
-            text = text.replace('"FloralFaceIDV33Foundation"', '"' + foundation + '"')
+        for alias, module in compat.items():
+            if alias != module:
+                text = re.sub(r'(?ms)^cc_prebuilt_library_shared\s*\{\s*name:\s*"' +
+                              alias + r'",.*?^\}\n?', '', text)
+                text = text.replace('"' + alias + '"', '"' + module + '"')
         target.write_text(text)
     generated = root / "generated"
     generated.mkdir(exist_ok=True)
     (generated / "profile.mk").write_text(
         "FLORAL_FACEID_ADD_VINTF := " + str(not skip_vintf).lower() + "\n" +
-        "FLORAL_FACEID_FOUNDATION_MODULE := " + foundation + "\n")
+        "FLORAL_FACEID_FOUNDATION_MODULE := " + compat["FloralFaceIDV33Foundation"] + "\n" +
+        "FLORAL_FACEID_COMPAT_PACKAGES := " + " ".join(compat.values()) + "\n")
     config = ET.Element("resources")
     array = ET.SubElement(config, "string-array", name="config_biometric_sensors", translatable="false")
     for value in sensors:
@@ -136,9 +146,9 @@ runtime_resource_overlay {
 }
 ''')
     outputs = ["Android.bp", "native/camera/Android.bp", "overlay/res/values/config.xml", "generated/profile.mk"]
-    inputs = list(dict.fromkeys(overlays + [vendor / "Android.bp"] + foundation_inputs))
+    inputs = list(dict.fromkeys(overlays + [vendor / "Android.bp"] + compat_inputs))
     profile = {"vendor_namespace_imports": imports, "sensors": sensors,
-               "foundation_module": foundation,
+               "foundation_module": compat["FloralFaceIDV33Foundation"], "compat_modules": compat,
                "face_sensor_id": face_id, "add_vintf": not skip_vintf,
                "input_files": [{"path": str(p.resolve()), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()} for p in inputs],
                "output_files": [{"path": p, "sha256": hashlib.sha256((root/p).read_bytes()).hexdigest()} for p in outputs]}

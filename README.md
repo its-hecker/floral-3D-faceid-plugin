@@ -101,10 +101,10 @@ Preserve `+=` for your base VINTF/policy lists.
 The replacement Face/Citadel shared libraries declare `overrides` as well as
 filtering product entries. Soong's generated vendor image can otherwise pull
 the originals back in through another module's dependencies and report two
-owners for the same library path. When Lineage's v33 stagefright provider is
-present, preparation verifies its arm64 binary against the immutable plugin
-input and shares that module. Its existing 32-bit variant remains available.
-Without that provider, the plugin uses its own pinned arm64 fallback. A differing
+owners for the same library path. When Lineage's v33 base, crypto or stagefright
+providers are present, preparation verifies their arm64 binaries against the
+immutable plugin inputs and shares those modules. Their existing 32-bit variants
+remain available. Missing providers use the plugin's pinned arm64 fallbacks. A differing
 existing binary requires ABI review; preparation stops before generating files.
 
 The stock `manifest_face.xml` module selection is replaced with

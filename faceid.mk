@@ -10,6 +10,7 @@ $(error $(FLORAL_FACEID_READY))
 endif
 include $(FLORAL_FACEID_PLUGIN_PATH)/generated/profile.mk
 FLORAL_FACEID_FOUNDATION_MODULE ?= FloralFaceIDV33Foundation
+FLORAL_FACEID_COMPAT_PACKAGES ?= FloralFaceIDV33Base FloralFaceIDV33Crypto $(FLORAL_FACEID_FOUNDATION_MODULE)
 
 PRODUCT_SOONG_NAMESPACES += $(FLORAL_FACEID_PLUGIN_PATH)
 # Inherit this file after the base device and vendor products.
@@ -34,7 +35,7 @@ PRODUCT_PACKAGES += \
     FloralFaceIDCalibrationProto FloralFaceIDEnrollmentProto FloralFaceIDAuthUtil \
     FloralFaceIDAirbrushClient FloralFaceIDAirbrushService FloralFaceIDNeuralNetworks \
     FloralFaceIDAutocalSolvers FloralFaceIDCameraNDK \
-    FloralFaceIDV33Base FloralFaceIDV33Crypto $(FLORAL_FACEID_FOUNDATION_MODULE) \
+    $(FLORAL_FACEID_COMPAT_PACKAGES) \
     FloralFaceIDFrameworkOverlay \
     android.hardware.thermal@2.0.vendor:64 \
     android.hardware.biometrics.face@1.0.vendor:64

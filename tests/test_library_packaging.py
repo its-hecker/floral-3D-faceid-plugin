@@ -108,6 +108,23 @@ class LibraryPackagingTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "Prepared source changed"):
                 verify_ready.verify(self.plugin)
 
+    def test_all_three_matching_compat_libraries_use_the_base_multilib_providers(self):
+        compat = self.base_provider()
+        with (compat / "Android.bp").open("a") as output:
+            for name in ("libbase-v33", "libcrypto-v33"):
+                output.write('\ncc_prebuilt_library_shared {\n    name: "' + name + '",\n'
+                             '    vendor: true,\n    target: {\n'
+                             '        android_arm64: { srcs: ["vndk/v33/arm64/' + name + '.so"] },\n'
+                             '    },\n    compile_multilib: "both",\n}\n')
+                pinned = self.pinned.parent / (name + ".so")
+                pinned.write_bytes(name.encode())
+                (compat / "vndk/v33/arm64" / pinned.name).write_bytes(pinned.read_bytes())
+        bp = self.generate()
+        for alias in ("FloralFaceIDV33Base", "FloralFaceIDV33Crypto", "FloralFaceIDV33Foundation"):
+            self.assertNotIn('name: "' + alias + '"', bp)
+        self.assertIn("FLORAL_FACEID_COMPAT_PACKAGES := libbase-v33 libcrypto-v33 libstagefright_foundation-v33",
+                      (self.plugin / "generated/profile.mk").read_text())
+
 
 if __name__ == "__main__":
     unittest.main()
